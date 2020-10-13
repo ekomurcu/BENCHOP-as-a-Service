@@ -24,7 +24,7 @@ runcmd:
  - rabbitmqctl add_vhost acc5Host
  - rabbitmqctl set_user_tags acc5 accTag
  - rabbitmqctl set_permissions -p acc5Host acc5 ".*" ".*" ".*"
-
+ - git clone https://github.com/ajamlou/ACC5_project.git
 
 
 
