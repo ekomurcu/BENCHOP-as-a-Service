@@ -8,6 +8,10 @@ packages:
  - build-essential
 byobu_default: system 
 
+write_files:
+  - path: /home/ubuntu/cowsay-app.py
+    content:
+      print('Hello world!')
 
 runcmd:
  - sudo bash
@@ -25,7 +29,3 @@ runcmd:
  - rabbitmqctl set_user_tags acc5 accTag
  - rabbitmqctl set_permissions -p acc5Host acc5 ".*" ".*" ".*"
  - git clone https://github.com/ajamlou/ACC5_project.git
-
-
-
-
