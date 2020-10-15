@@ -1,0 +1,29 @@
+<div class="home-container">
+  <div
+    *ngIf="!hasPressed"
+    (hasPressed)="hasGoneBack($event)"
+    class="sub-container"
+  >
+    <h3>Choose which problem you would like to test:</h3>
+    <button
+      class="problem-button"
+      *ngFor="let problem of problems"
+      (click)="redirect(problem)"
+    >
+      {{ problem }}
+    </button>
+  </div>
+
+  <div *ngIf="hasPressed" [problemName]="problem" class="sub-container">
+    <button class="back-button" (click)="goBack()">Go back</button>
+    <h1>Test Problem {{ problem }}</h1>
+    <h2>Specify below the parameters you wish to test</h2>
+    <input class="input" type="text" placeholder="Parameter 1" />
+    <input class="input" type="text" placeholder="Parameter 2" />
+    <input class="input" type="text" placeholder="Parameter 3" />
+    <button class="problem-button" (click)="getResults()" style="width: auto">
+      Calculate
+    </button>
+    <div *ngIf="results"><h1>RESULTS</h1></div>
+  </div>
+</div>
