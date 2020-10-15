@@ -5,13 +5,12 @@ This project aims to speed up the benchmark evaluation BENCHOP by running the co
 ### Running the backend VM
 
 ### Running the frontend GUI
-In order to the run the GUI, the Angular CLI needs to be installed via 
 
-`npm install -g @angular/cli`
+1. `npm install -g @angular/cli`
 
-Then, open terminal/command line in th BENCHOP-front folder and run 
+2. Then, open terminal/command line in the BENCHOP-front
 
-`ng serve`
+3. `ng serve`
 
-Go to `https://localhost:4200/`
+4. Go to `https://localhost:4200/`
 
