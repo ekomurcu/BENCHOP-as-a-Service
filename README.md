@@ -8,7 +8,7 @@ This project aims to speed up the benchmark evaluation BENCHOP by running the co
 
 1. `npm install -g @angular/cli`
 
-2. Then, open terminal/command line in the BENCHOP-front
+2. Open terminal/command line in the BENCHOP-front directory
 
 3. `ng serve`
 
