@@ -18,7 +18,7 @@ runcmd:
  - apt-get install python3.6
  - apt-get install -y python3-pip
  - pip3 install --upgrade pip
- - apt-get install rabbitmq-server
+ - apt-get install -y rabbitmq-server
  - pip3 install celery
 
 
