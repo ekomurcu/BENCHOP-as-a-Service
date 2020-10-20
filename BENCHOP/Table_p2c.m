@@ -1,5 +1,10 @@
 %% Problem 1 c) II
 
+function [timeBSupoutCallII,relerrBSupoutCallII] = Table_p2c()
+Methods={'MC','MC-S','QMC-S','MLMC','MLMC-A',...
+    'FFT','FGL','COS',...
+    'FD','FD-NU','FD-AD',...
+    'RBF','RBF-FD','RBF-PUM','RBF-LSML','RBF-AD','RBF-MLT'};
 display('Problem 1 c) II');
 rootpath=pwd;
 S=[97,98,99]; sig=0.01; r=0.1; T=0.25; K=100; B=1.25*K;

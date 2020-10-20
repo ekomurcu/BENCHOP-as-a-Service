@@ -1,5 +1,10 @@
 %% Problem 1 b) I
 
+function [timeBSamPutUI,relerrBSamPutUI] = Table_p1b()
+Methods={'MC','MC-S','QMC-S','MLMC','MLMC-A',...
+    'FFT','FGL','COS',...
+    'FD','FD-NU','FD-AD',...
+    'RBF','RBF-FD','RBF-PUM','RBF-LSML','RBF-AD','RBF-MLT'};
 display('Problem 1 b) I');
 rootpath=pwd;
 S=[90,100,110]; K=100; T=1.0; r=0.03; sig=0.15;

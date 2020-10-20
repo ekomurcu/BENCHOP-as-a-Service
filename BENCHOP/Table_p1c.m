@@ -1,5 +1,11 @@
+
 %% Problem 1 c) I
 
+function [timeBSupoutCallI,relerrBSupoutCallI] = Table_p1c()
+Methods={'MC','MC-S','QMC-S','MLMC','MLMC-A',...
+    'FFT','FGL','COS',...
+    'FD','FD-NU','FD-AD',...
+    'RBF','RBF-FD','RBF-PUM','RBF-LSML','RBF-AD','RBF-MLT'};
 display('Problem 1 c) I');
 rootpath=pwd;
 S=[90,100,110]; K=100; T=1.0; r=0.03; sig=0.15; B=1.25*K;
