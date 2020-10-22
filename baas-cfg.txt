@@ -53,5 +53,4 @@ runcmd:
  - git clone https://github.com/ekomurcu/cloud-computing.git
  - git clone https://github.com/ajamlou/ACC5_project.git
  - pip3 install flower
- - pip3 install celery-flower
 
