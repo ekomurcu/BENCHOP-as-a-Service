@@ -49,6 +49,7 @@ runcmd:
  - apt-add-repository ppa:octave/stable
  - apt-get install -y octave
  - pip3 install oct2py 
+ - cd /home/ubuntu/
  - git clone https://github.com/ekomurcu/cloud-computing.git
  - git clone https://github.com/ajamlou/ACC5_project.git
  - pip3 install flower
