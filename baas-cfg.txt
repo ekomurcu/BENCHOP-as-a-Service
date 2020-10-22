@@ -47,10 +47,8 @@ runcmd:
  - rabbitmqctl set_permissions -p acc5host acc5 ".*" ".*" ".*"
  - apt-get install -y git
  - apt-add-repository ppa:octave/stable
- - apt-get install octave
+ - apt-get install -y octave
  - pip3 install oct2py 
- - git config --global user.email "ekomurcu@sabanciuniv.edu"
- - git config --global user.name "ekomurcu"
  - git clone https://github.com/ekomurcu/cloud-computing.git
  - git clone https://github.com/ajamlou/ACC5_project.git
  - pip3 install flower
