@@ -1,13 +1,14 @@
 %% Problem 1 c) II
 
-function [timeBSupoutCallII,relerrBSupoutCallII] = Table_p2c()
+function [timeBSupoutCallII,relerrBSupoutCallII] = Table_p2c(sig)
 Methods={'MC','MC-S','QMC-S','MLMC','MLMC-A',...
     'FFT','FGL','COS',...
     'FD','FD-NU','FD-AD',...
     'RBF','RBF-FD','RBF-PUM','RBF-LSML','RBF-AD','RBF-MLT'};
+
 display('Problem 1 c) II');
 rootpath=pwd;
-S=[97,98,99]; sig=0.01; r=0.1; T=0.25; K=100; B=1.25*K;
+S=[97,98,99]; r=0.1; T=0.25; K=100; B=1.25*K; %sig=0.01;
 U=[0.033913177006134   0.512978189232598   1.469203342553328];
 
 filepathsBSupoutCallII=getfilenames('./','BSupoutCallII_*.m');
