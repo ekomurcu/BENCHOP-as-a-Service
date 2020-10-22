@@ -1,10 +1,12 @@
 <div class="home-container">
   <div
-    *ngIf="!hasPressed"
+    *ngIf="!hasPressed && !aboutPage"
     (hasPressed)="hasGoneBack($event)"
     class="sub-container"
   >
-    <h3>Choose which problem you would like to test:</h3>
+    <button (click)="about()" class="about-button">About</button>
+
+    <h3>Choose which problem you would like to evaluate:</h3>
     <button
       class="problem-button"
       *ngFor="let problem of problems"
@@ -14,16 +16,56 @@
     </button>
   </div>
 
+  <div class="sub-container" *ngIf="aboutPage">
+    <button class="back-button" (click)="about()">Go back</button>
+    <h2>About this project</h2>
+    <div class="text-container">
+      <p>
+        The BENCHOP project is an international collaborative project initiated
+        by the Computational Finance research group at the Division of
+        Scientific Computing at Uppsala University in Uppsala, Sweden. The
+        purpose and aim of the BENCHOP project is to provide sets of benchmark
+        problems that can be used for comparison and evaluation of methods. This
+        in turn can serve as a take off for future development of methods in the
+        field of option pricing.
+      </p>
+      <p>
+        This applicaiton is part of a course in Applied Cloud Computing at
+        Uppsala University, and aims to let the user to run only one of the test
+        problems in the benchmark evaluation, while also allowing for testing
+        with different sets of parameters for each problem.
+      </p>
+    </div>
+  </div>
+
   <div *ngIf="hasPressed" [problemName]="problem" class="sub-container">
     <button class="back-button" (click)="goBack()">Go back</button>
     <h1>Test Problem {{ problem }}</h1>
-    <h2>Specify below the parameters you wish to test</h2>
-    <input class="input" type="text" placeholder="Parameter 1" />
-    <input class="input" type="text" placeholder="Parameter 2" />
-    <input class="input" type="text" placeholder="Parameter 3" />
-    <button class="problem-button" (click)="getResults()" style="width: auto">
+    <h2>Set the parameters you wish to evaluate</h2>
+    <input class="input" type="number" placeholder="α" [(ngModel)]="paramOne" />
+    <input class="input" type="number" placeholder="β" [(ngModel)]="paramTwo" />
+    <input
+      class="input"
+      type="number"
+      placeholder="γ"
+      [(ngModel)]="paramThree"
+    />
+    <button
+      *ngIf="!loading"
+      class="problem-button"
+      (click)="getResults(problem)"
+      style="width: auto"
+    >
       Calculate
     </button>
-    <div *ngIf="results"><h1>RESULTS</h1></div>
+    <div *ngIf="loading">
+      <mat-spinner [diameter]="45" color="primary"></mat-spinner>
+      <p>Evaluating the benchmark (this may take a while)</p>
+    </div>
+    <div *ngIf="results">
+      <h1>RESULTS</h1>
+      <p>{{ paramOne }} {{ paramTwo }} {{ paramThree }}</p>
+      <p>{{ response[1].date }}</p>
+    </div>
   </div>
 </div>
