@@ -38,7 +38,7 @@ runcmd:
  - apt-get update
  - apt-get install python3.6
  - apt-get install python3-pip
- - apt-get install rabbitmq-server
+ - apt-get install -y rabbitmq-server
  - pip3 install celery==4.4.0
  - pip3 install flask
  - rabbitmqctl add_user acc5 0000
