@@ -1,0 +1,109 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+  background-color: #fff;
+  height: 100%;
+  width: 100%;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: "Glacial Indifference", sans-serif;
+}
+
+.home-container,
+.sub-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.problem-button,
+.back-button,
+.about-button {
+  text-transform: uppercase;
+  color: #fff;
+  border: none;
+  font-weight: bold;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  font-size: 20px;
+  box-shadow: 2px 3px #888888;
+  outline: none;
+}
+.problem-button {
+  background-color: #673ab7;
+  height: 50px;
+  width: 120px;
+}
+
+.back-button {
+  background-color: #b7673a;
+  float: left;
+  height: 50px;
+  width: 120px;
+}
+
+.problem-button:active {
+  background-color: #8259cb;
+}
+.problem-button:hover {
+  background-color: #8259cb;
+}
+
+.back-button:active {
+  background-color: #d39674;
+}
+.back-button:hover {
+  background-color: #d39674;
+}
+
+.about-button {
+  background-color: black;
+  color: #fff;
+  height: 50px;
+  width: 120px;
+}
+
+.about-button:active {
+  background-color: grey;
+}
+.about-button:hover {
+  background-color: grey;
+}
+
+.input {
+  width: 100px;
+  height: 30px;
+  border-radius: 5px;
+  font-size: 20;
+  font-weight: bold;
+  border: 1px solid grey;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.footer-text {
+  color: black;
+  margin: 15px;
+  text-align: center;
+}
+
+.text-container {
+  margin: 0 20px 0 20px;
+  max-width: 600px;
+  text-align: justify;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

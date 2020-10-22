@@ -3,29 +3,24 @@
 apt_update: true
 apt_upgrade: true
 packages:
- - python-pip
- - python-dev
+ - python3-pip
+ - python3-dev
  - build-essential
+
+
 byobu_default: system 
 
-write_files:
-  - path: /home/ubuntu/cowsay-app.py
-    content:
-      print('Hello world!')
 
 runcmd:
  - sudo bash
  - apt-get update
+ - apt-get -y upgrade
  - apt-get install python3.6
- - apt-get install python3-pip
- - apt-get install rabbitmq-server
+ - apt-get install -y python3-pip
+ - pip3 install --upgrade pip
+ - apt-get install -y rabbitmq-server
  - pip3 install celery
- - apt install redis-server
- - pip3 install Flask
- - pip3 install Flask-RESTful
- - pip3 install -U "celery[redis]"
- - rabbitmqctl add_user acc5 acc1234
- - rabbitmqctl add_vhost acc5Host
- - rabbitmqctl set_user_tags acc5 accTag
- - rabbitmqctl set_permissions -p acc5Host acc5 ".*" ".*" ".*"
- - git clone https://github.com/ajamlou/ACC5_project.git
+
+
+
+
