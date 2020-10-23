@@ -1,6 +1,6 @@
 %% Problem 1 b) I
 
-function [timeBSamPutUI,relerrBSamPutUI] = Table_p1b(sig)
+function [timeBSamPutUI,relerrBSamPutUI] = Table_p1b(K, T, r, sig)
 Methods={'MC','MC-S','QMC-S','MLMC','MLMC-A',...
     'FFT','FGL','COS',...
     'FD','FD-NU','FD-AD',...
@@ -8,7 +8,7 @@ Methods={'MC','MC-S','QMC-S','MLMC','MLMC-A',...
 
 display('Problem 1 b) I');
 rootpath=pwd;
-S=[90,100,110]; K=100; T=1.0; r=0.03; %sig=0.15;
+S=[90,100,110]; %K=100; T=1.0; r=0.03; sig=0.15;
 U=[10.726486710094511 4.820608184813253 1.828207584020458];
 
 filepathsBSamPutUI=getfilenames('./','BSamPutUI_*.m');

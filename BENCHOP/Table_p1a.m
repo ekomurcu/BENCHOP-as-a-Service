@@ -1,6 +1,6 @@
 %% Problem 1 a) I
 
-function [timeBSeuCallUI,relerrBSeuCallUI] = Table_p1a(sig)
+function [timeBSeuCallUI,relerrBSeuCallUI] = Table_p1a(K, T, r, sig)
 Methods={'MC','MC-S','QMC-S','MLMC','MLMC-A',...
     'FFT','FGL','COS',...
     'FD','FD-NU','FD-AD',...
@@ -8,7 +8,7 @@ Methods={'MC','MC-S','QMC-S','MLMC','MLMC-A',...
 
 display('Problem 1 a) I');
 rootpath=pwd;
-S=[90,100,110]; K=100; T=1.0; r=0.03; %sig=0.15;
+S=[90,100,110]; %K=100; T=1.0; r=0.03; sig=0.15;
 U=[2.758443856146076 7.485087593912603 14.702019669720769];
 
 filepathsBSeuCallUI=getfilenames('./','BSeuCallUI_*.m');
@@ -28,4 +28,3 @@ for ii=1:numel(Methods)
 end
 
 cd(rootpath);
-
