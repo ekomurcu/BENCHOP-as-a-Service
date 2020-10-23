@@ -9,8 +9,11 @@ app = Flask(__name__)
 
 @app.route('/flaskFrontend', methods=['GET'])
 def count_pron():
-  problems = request.args.get('no', None)
+  K = float(request.args.get('K', None))
+  T = float(request.args.get('T', None))
+  r = float(request.args.get('r', None))
   sig = float(request.args.get('sig', None))
+  problems = request.args.get('no', None)
   problems = problems.split(',')
 
   i = 0
@@ -18,7 +21,7 @@ def count_pron():
     problems[i] = int(n)
     i = i + 1
 
-  data = group(benchop.s(problem_to_solve, sig) for problem_to_solve in problems)().get()
+  data = group(benchop.s(problem_to_solve, K, T, r, sig) for problem_to_solve in problems)().get()
 
   data_flat = []
   for sublist in data:

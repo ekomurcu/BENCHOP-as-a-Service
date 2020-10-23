@@ -6,10 +6,10 @@ import os
 app = Celery('tasks', backend='rpc://', broker='pyamqp://guest@localhost//')
 
 @app.task
-def benchop(x, sig):
+def benchop(x, K, T, r, sig):
     oc = Oct2Py()
 
-    time, relerr = oc.Table_run(x, sig, nout=2)
+    time, relerr = oc.Table_run(x, K, T, r, sig, nout=2)
     time_flat = []
     for sublist in time:
         for item in sublist:
