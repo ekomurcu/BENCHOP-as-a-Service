@@ -1,4 +1,26 @@
 <div class="home-container">
+  <div class="sub-container" *ngIf="aboutPage">
+    <button class="back-button" (click)="about()">Go back</button>
+    <h2>About this project</h2>
+    <div class="text-container">
+      <p>
+        The BENCHOP project is an international collaborative project initiated
+        by the Computational Finance research group at the Division of
+        Scientific Computing at Uppsala University in Uppsala, Sweden. The
+        purpose and aim of the BENCHOP project is to provide sets of benchmark
+        problems that can be used for comparison and evaluation of methods. This
+        in turn can serve as a take off for future development of methods in the
+        field of option pricing.
+      </p>
+      <p>
+        This applicaiton is part of a course in Applied Cloud Computing at
+        Uppsala University, and aims to let the user to run only one of the test
+        problems in the benchmark evaluation, while also allowing for testing
+        with different sets of parameters for each problem.
+      </p>
+    </div>
+  </div>
+
   <div
     *ngIf="!hasPressed && !aboutPage"
     (hasPressed)="hasGoneBack($event)"
@@ -26,37 +48,15 @@
       <h3>
         ... or if you would like to add a new method to the BENCHOP project
       </h3>
-      <button class="all-problems-button" (click)="allProblems()">
+      <button class="all-problems-button" (click)="addProblem()">
         Add new method
       </button>
     </div>
   </div>
 
-  <div class="sub-container" *ngIf="aboutPage">
-    <button class="back-button" (click)="about()">Go back</button>
-    <h2>About this project</h2>
-    <div class="text-container">
-      <p>
-        The BENCHOP project is an international collaborative project initiated
-        by the Computational Finance research group at the Division of
-        Scientific Computing at Uppsala University in Uppsala, Sweden. The
-        purpose and aim of the BENCHOP project is to provide sets of benchmark
-        problems that can be used for comparison and evaluation of methods. This
-        in turn can serve as a take off for future development of methods in the
-        field of option pricing.
-      </p>
-      <p>
-        This applicaiton is part of a course in Applied Cloud Computing at
-        Uppsala University, and aims to let the user to run only one of the test
-        problems in the benchmark evaluation, while also allowing for testing
-        with different sets of parameters for each problem.
-      </p>
-    </div>
-  </div>
-
   <div *ngIf="hasPressed" [problemName]="problem" class="sub-container">
     <button class="back-button" (click)="goBack()">Go back</button>
-    <div *ngIf="!allProblemsPage" class="sub-container">
+    <div *ngIf="!allProblemsPage && !addProblemsPage" class="sub-container">
       <h1>Test Problem {{ problem }}</h1>
       <h2>Set the parameters you wish to evaluate</h2>
       <h3 *ngIf="invalid" style="color: red !important">
@@ -101,8 +101,28 @@
       </h3>
     </div>
 
+    <div *ngIf="addProblemsPage" style="margin: 0 25px 0 25px">
+      <h3>Here you can add a new problem to the benchmark evaluation</h3>
+      <input
+        class="input"
+        style="width: 200px !important; margin-bottom: 40px !important"
+        type="text"
+        placeholder="Write new method"
+        [(ngModel)]="newMethod"
+      />
+    </div>
+
     <button
-      *ngIf="!loading && allProblemsPage"
+      *ngIf="!loading && addProblemsPage && !allProblemsPage"
+      class="problem-button"
+      (click)="addNewMethod(newMethod)"
+      style="width: auto"
+    >
+      Add new method
+    </button>
+
+    <button
+      *ngIf="!loading && allProblemsPage && !addProblemsPage"
       class="problem-button"
       (click)="getAllResults()"
       style="width: auto"
@@ -111,7 +131,7 @@
     </button>
 
     <button
-      *ngIf="!loading && !allProblemsPage"
+      *ngIf="!loading && !allProblemsPage && !addProblemsPage"
       class="problem-button"
       (click)="getResults(problem)"
       style="width: auto; margin-top: 30px"
@@ -120,7 +140,10 @@
     </button>
     <div *ngIf="loading" class="sub-container">
       <mat-spinner [diameter]="45" color="primary"></mat-spinner>
-      <p>Evaluating the benchmark (this may take a while)</p>
+      <p *ngIf="!addProblemsPage">
+        Evaluating the benchmark (this may take a while)
+      </p>
+      <p *ngIf="addProblemsPage">Adding new method (this may take a while)</p>
     </div>
     <div *ngIf="results && !loading">
       <h1>RESULTS</h1>
@@ -130,7 +153,7 @@
       <div *ngIf="!error">
         <p>Time taken to evaluate: {{ timeTaken }} seconds</p>
         <h3>Evaluation results</h3>
-        <p>{{ response }}</p>
+        <p style="margin: 0 25px 0 25px">{{ response }}</p>
       </div>
     </div>
   </div>

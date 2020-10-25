@@ -30,6 +30,8 @@ export class HomeComponent implements OnInit {
   endTimeStamp: Date;
   timeTaken: number;
   error: boolean = false;
+  addProblemsPage: boolean = false;
+  newMethod: string = '';
 
   private _baseUrl = 'http://130.238.29.12:5000/flaskFrontend?no=';
 
@@ -58,18 +60,27 @@ export class HomeComponent implements OnInit {
 
   allProblems() {
     this.hasPressed = !this.hasPressed;
-    this.allProblemsPage = !this.allProblemsPage;
+    this.allProblemsPage = true;
+    this.addProblemsPage = false;
+  }
+
+  addProblem() {
+    this.hasPressed = !this.hasPressed;
+    this.addProblemsPage = true;
+    this.allProblemsPage = false;
   }
 
   goBack() {
     this.hasPressed = !this.hasPressed;
     this.allProblemsPage = false;
+    this.addProblemsPage = false;
     this.K = null;
     this.T = null;
     this.r = null;
     this.sig = null;
     this.response = null;
     this.results = false;
+    this.newMethod = '';
   }
 
   getResults(problem) {
@@ -112,10 +123,20 @@ export class HomeComponent implements OnInit {
   }
 
   getAllResults() {
-    const allResultsUrl =
-      'http://130.238.29.12:5000/flaskFrontend?no=1,2,3,4,5';
+    const allResultsUrl = 'http://130.238.29.12:5000/flaskFrontend?no=1,2,3,5';
     this.loading = true;
     this.sub = this.getJSON(allResultsUrl).subscribe((response) => {
+      console.log(response);
+      this.response = response;
+      this.loading = false;
+    });
+    this.results = true;
+  }
+
+  addNewMethod(param) {
+    const addMethodsUrl = 'http://130.238.29.12:5000/newMethod?name=' + param;
+    this.loading = true;
+    this.sub = this.getJSON(addMethodsUrl).subscribe((response) => {
       console.log(response);
       this.response = response;
       this.loading = false;
