@@ -54,5 +54,6 @@ runcmd:
  - git clone https://github.com/ajamlou/ACC5_project.git
  - pip3 install flower
  - cd /home/ubuntu/ACC5_project/BENCHOP/
+ - pip3 install -U flask-cors
  - python3 flaskFrontend.py
 
