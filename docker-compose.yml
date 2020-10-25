@@ -1,0 +1,4 @@
+version: '3'
+services:
+  celery_worker:
+    image: arslan5555/benchop_worker:project
