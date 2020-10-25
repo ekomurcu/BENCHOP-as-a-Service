@@ -54,4 +54,5 @@ runcmd:
  - git clone https://github.com/ajamlou/ACC5_project.git
  - pip3 install flower
  - cd /home/ubuntu/ACC5_project/BENCHOP/
- - celery -A tasks worker --loglevel=INFO --broker='amqp://acc5:0000@192.168.2.249:5672/acc5host'
+ - python3 flaskFrontend.py
+
