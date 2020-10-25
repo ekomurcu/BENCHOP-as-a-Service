@@ -18,7 +18,7 @@ This project aims to speed up the benchmark evaluation BENCHOP by running the co
 
 3. run `curl -i http://130.238.29.12:5000/flaskFrontend?no=1,2,3,5` if you want to evaluate all problems with default parameters. (4th and 6th ones can not be evaluated, will be handled in the future release.)
 
-4. run `curl -i -v “http://130.238.29.12:5000/flaskFrontend?no=1,2,3,5&K=300&T=3&r=0.0001&sig= 0.9` if you want to run them with custom parameters of K=300.0, T=3.0, r=0.0001 and sig= 0.9.
+4. run `curl -i -v “http://130.238.29.12:5000/flaskFrontend?no=1,2,3,5&K=300&T=3&r=0.0001&sig=0.9` if you want to run them with custom parameters of K=300.0, T=3.0, r=0.0001 and sig= 0.9.
 
 5. run `curl -i http://130.238.29.12:5000/newMethod?name=FD-NU` if you want to upload the new method of FD-NU. All of the available methods can be found at http://www.it.uu.se/research/scientific_computing/project/compfin/benchop/original .
 
