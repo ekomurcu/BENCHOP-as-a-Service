@@ -6,14 +6,30 @@
   >
     <button (click)="about()" class="about-button">About</button>
 
-    <h3>Choose which problem you would like to evaluate:</h3>
-    <button
-      class="problem-button"
-      *ngFor="let problem of problems"
-      (click)="redirect(problem)"
-    >
-      {{ problem }}
-    </button>
+    <h3>Choose which problem you would like to evaluate</h3>
+    <div class="grid-container">
+      <button
+        class="problem-button"
+        *ngFor="let problem of problems"
+        (click)="redirect(problem)"
+      >
+        {{ problem }}
+      </button>
+    </div>
+    <div>
+      <h3>... or evaluate all problems at once</h3>
+      <button class="all-problems-button" (click)="allProblems()">
+        Evaluate all problems
+      </button>
+    </div>
+    <div>
+      <h3>
+        ... or if you would like to add a new method to the BENCHOP project
+      </h3>
+      <button class="all-problems-button" (click)="allProblems()">
+        Add new method
+      </button>
+    </div>
   </div>
 
   <div class="sub-container" *ngIf="aboutPage">
@@ -40,32 +56,82 @@
 
   <div *ngIf="hasPressed" [problemName]="problem" class="sub-container">
     <button class="back-button" (click)="goBack()">Go back</button>
-    <h1>Test Problem {{ problem }}</h1>
-    <h2>Set the parameters you wish to evaluate</h2>
-    <input class="input" type="number" placeholder="α" [(ngModel)]="paramOne" />
-    <input class="input" type="number" placeholder="β" [(ngModel)]="paramTwo" />
-    <input
-      class="input"
-      type="number"
-      placeholder="γ"
-      [(ngModel)]="paramThree"
-    />
+    <div *ngIf="!allProblemsPage" class="sub-container">
+      <h1>Test Problem {{ problem }}</h1>
+      <h2>Set the parameters you wish to evaluate</h2>
+      <h3 *ngIf="invalid" style="color: red !important">
+        {{ errorMessage }}
+      </h3>
+      <div
+        style="
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          column-gap: 10px;
+          row-gap: 10px;
+        "
+      >
+        <div style="display: flex; flex-direction: row">
+          <p>K =</p>
+          <input class="input" type="number" placeholder="K" [(ngModel)]="K" />
+        </div>
+        <div style="display: flex; flex-direction: row">
+          <p>T =</p>
+          <input class="input" type="number" placeholder="T" [(ngModel)]="T" />
+        </div>
+        <div style="display: flex; flex-direction: row">
+          <p>r =</p>
+          <input class="input" type="number" placeholder="r" [(ngModel)]="r" />
+        </div>
+        <div style="display: flex; flex-direction: row">
+          <p>sig =</p>
+          <input
+            class="input"
+            type="number"
+            placeholder="sig"
+            [(ngModel)]="sig"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="allProblemsPage" style="margin: 0 25px 0 25px">
+      <h3>
+        Here you can test the benchmark evaluation for all six test problems at
+        once.
+      </h3>
+    </div>
+
     <button
-      *ngIf="!loading"
+      *ngIf="!loading && allProblemsPage"
       class="problem-button"
-      (click)="getResults(problem)"
+      (click)="getAllResults()"
       style="width: auto"
     >
       Calculate
     </button>
-    <div *ngIf="loading">
+
+    <button
+      *ngIf="!loading && !allProblemsPage"
+      class="problem-button"
+      (click)="getResults(problem)"
+      style="width: auto; margin-top: 30px"
+    >
+      Calculate
+    </button>
+    <div *ngIf="loading" class="sub-container">
       <mat-spinner [diameter]="45" color="primary"></mat-spinner>
       <p>Evaluating the benchmark (this may take a while)</p>
     </div>
-    <div *ngIf="results">
+    <div *ngIf="results && !loading">
       <h1>RESULTS</h1>
-      <p>{{ paramOne }} {{ paramTwo }} {{ paramThree }}</p>
-      <p>{{ response[1].date }}</p>
+      <h3 *ngIf="error" style="color: red !important">
+        An error occurred. Please try again.
+      </h3>
+      <div *ngIf="!error">
+        <p>Time taken to evaluate: {{ timeTaken }} seconds</p>
+        <h3>Evaluation results</h3>
+        <p>{{ response }}</p>
+      </div>
     </div>
   </div>
 </div>

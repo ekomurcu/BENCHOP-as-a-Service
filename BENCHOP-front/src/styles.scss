@@ -25,7 +25,8 @@ body {
 
 .problem-button,
 .back-button,
-.about-button {
+.about-button,
+.all-problems-button {
   text-transform: uppercase;
   color: #fff;
   border: none;
@@ -40,6 +41,12 @@ body {
   background-color: #673ab7;
   height: 50px;
   width: 120px;
+}
+
+.all-problems-button {
+  background-color: #18a2b4;
+  height: 50px;
+  width: 250px;
 }
 
 .back-button {
@@ -61,6 +68,13 @@ body {
 }
 .back-button:hover {
   background-color: #d39674;
+}
+
+.all-problems-button:active {
+  background-color: #3dd2e5;
+}
+.all-problems-button:hover {
+  background-color: #3dd2e5;
 }
 
 .about-button {
@@ -85,7 +99,8 @@ body {
   font-weight: bold;
   border: 1px solid grey;
   text-align: center;
-  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-left: 10px;
 }
 .footer-text {
   color: black;
@@ -97,6 +112,13 @@ body {
   margin: 0 20px 0 20px;
   max-width: 600px;
   text-align: justify;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 10px;
+  row-gap: 10px;
 }
 
 html,

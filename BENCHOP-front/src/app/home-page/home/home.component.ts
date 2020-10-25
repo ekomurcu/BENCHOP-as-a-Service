@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -10,24 +11,38 @@ import { Observable } from 'rxjs';
 export class HomeComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
-  problems: string[] = ['1a', '1b', '2a', '2b', '3a', '3b'];
+  problems: string[] = ['1', '2', '3', '4', '5', '6'];
   hasPressed: boolean = false;
   results: boolean = false;
   problem: string;
   response: any;
   loading: boolean = false;
-  paramOne: number;
-  paramTwo: number;
-  paramThree: number;
+  K: number;
+  T: number;
+  r: number;
+  sig: number;
   aboutPage: boolean = false;
+  allProblemsPage: boolean = false;
+  sub: any;
+  invalid: boolean = false;
+  errorMessage: string = '';
+  startTimeStamp: Date;
+  endTimeStamp: Date;
+  timeTaken: number;
+  error: boolean = false;
 
-  private _jsonURL =
-    'https://dictionaryapi.com/api/v3/references/collegiate/json/test?key=f1b45755-b659-48b9-b775-3e334772c2d4';
+  private _baseUrl = 'http://130.238.29.12:5000/flaskFrontend?no=';
 
-  private _baseUrl = 'http://127.0.0.1:5000/flaskFrontend?no=';
-
-  public getJSON(): Observable<any> {
-    return this.http.get(this._jsonURL);
+  public getJSON(url): Observable<any> {
+    console.log(url);
+    const headers = new HttpHeaders().set(
+      'Content-Type',
+      'text/plain; charset=utf-8'
+    );
+    return this.http.get(url, {
+      headers,
+      responseType: 'text',
+    });
   }
 
   ngOnInit(): void {}
@@ -41,24 +56,67 @@ export class HomeComponent implements OnInit {
     this.aboutPage = !this.aboutPage;
   }
 
+  allProblems() {
+    this.hasPressed = !this.hasPressed;
+    this.allProblemsPage = !this.allProblemsPage;
+  }
+
   goBack() {
     this.hasPressed = !this.hasPressed;
+    this.allProblemsPage = false;
+    this.K = null;
+    this.T = null;
+    this.r = null;
+    this.sig = null;
+    this.response = null;
+    this.results = false;
   }
 
   getResults(problem) {
-    const newUrl =
-      this._baseUrl +
-      problem +
-      '&sigma=' +
-      this.paramOne +
-      '&alfa=' +
-      this.paramTwo +
-      '&beta=' +
-      this.paramThree;
-    console.log(newUrl);
+    if (!this.K || !this.T || !this.r || !this.sig) {
+      this.errorMessage = 'You must set all the parameters, with numbers';
+      this.invalid = true;
+      return;
+    } else {
+      this.invalid = false;
+      const newUrl =
+        this._baseUrl +
+        problem +
+        '&K=' +
+        this.K +
+        '&T=' +
+        this.T +
+        '&r=' +
+        this.r +
+        '&sig=' +
+        this.sig;
+      this.loading = true;
+      this.startTimeStamp = new Date();
+      this.sub = this.getJSON(newUrl)
+        .pipe(
+          catchError(async (err) => {
+            console.log(err), (this.error = true);
+          })
+        )
+        .subscribe((response) => {
+          console.log(response);
+          this.response = response;
+          this.loading = false;
+          this.endTimeStamp = new Date();
+          this.timeTaken =
+            (this.endTimeStamp.getTime() - this.startTimeStamp.getTime()) /
+            1000;
+        });
+      this.results = true;
+    }
+  }
 
+  getAllResults() {
+    const allResultsUrl =
+      'http://130.238.29.12:5000/flaskFrontend?no=1,2,3,4,5';
     this.loading = true;
-    this.getJSON().subscribe((response) => {
+    this.sub = this.getJSON(allResultsUrl).subscribe((response) => {
+      console.log(response);
       this.response = response;
       this.loading = false;
     });
