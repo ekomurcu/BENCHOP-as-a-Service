@@ -7,8 +7,7 @@ from  novaclient import client
 import keystoneclient.v3.client as ksclient
 from keystoneauth1 import loading
 from keystoneauth1 import session
-
-flavor = "ssc.xsmall" 
+ 
 private_net = "UPPMAX 2020/1-2 Internal IPv4 Network"
 floating_ip_pool_name = "Public External IPv4 Network"
 floating_ip = None
@@ -30,7 +29,6 @@ print ("user authorization completed.")
 
 image = nova.glance.find_image(image_name)
 
-flavor = nova.flavors.find(name=flavor)
 
 if private_net != None:
     net = nova.neutron.find_network(private_net)
@@ -38,18 +36,21 @@ if private_net != None:
 else:
     sys.exit("private-net not defined.")
 
-#print("Path at terminal when executing this file")
-#print(os.getcwd() + "\n")
-cfg_file_path =  os.getcwd()+'/baas-cfg.txt'
-if os.path.isfile(cfg_file_path):
-    userdata = open(cfg_file_path)
-else:
-    sys.exit("baas-cfg.txt is not in current working directory")
-
 secgroups = ['Ego_C2']
-for i in range(1,7):
+
+flavours =["ssc.xsmall", "ssc.xsmall.highcpu", "ssc.small", "ssc.small.highcpu",  "ssc.medium", "ssc.medium.highcpu", "ssc.large","ssc.large.highcpu", "ssc.xlarge", "ssc.xlarge.highcpu" ]
+flavours_name = ["xsmall", "xsmahigh","small" , "smahigh", "medium", "medhigh",  "large", "largehigh", "xlarge", "xlhigh"]
+i=0
+for flavor_name in flavours: 
+    cfg_file_path =  os.getcwd()+'/baas-cfg.txt'
+    if os.path.isfile(cfg_file_path):
+        userdata = open(cfg_file_path)
+    else:
+        sys.exit("baas-cfg.txt is not in current working directory")
     print ("Creating instance ... ")
-    word="benchop5-worker"+str(i)
+    #word="benchop5-worker"+str(i)
+    word="benchop5-"+flavours_name[i]  
+    flavor = nova.flavors.find(name=flavor_name)
     instance = nova.servers.create(name=word, image=image, flavor=flavor, userdata=userdata, nics=nics,security_groups=secgroups, key_name="Egemen-SSH")
     inst_status = instance.status
     print ("waiting for 10 seconds.. ")
@@ -60,5 +61,7 @@ for i in range(1,7):
         time.sleep(5)
         instance = nova.servers.get(instance.id)
         inst_status = instance.status
-
+    i+=1
     print ("Instance: "+ instance.name +" is in " + inst_status + "state")
+    enter=input("Press any key to continue")
+    
