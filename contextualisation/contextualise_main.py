@@ -38,11 +38,11 @@ if private_net != None:
 else:
     sys.exit("private-net not defined.")
 
-cfg_file_path =  os.getcwd()+'main-cfg.txt'
+cfg_file_path =  os.getcwd()+'/main-cfg.txt'
 if os.path.isfile(cfg_file_path):
     userdata = open(cfg_file_path)
 else:
-    sys.exit("baas-cfg.txt is not in current working directory")
+    sys.exit("main-cfg.txt is not in current working directory")
 
 secgroups = ['Ego_C2']
 print ("Creating instance ... ")
