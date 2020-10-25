@@ -6,7 +6,7 @@ This project aims to speed up the benchmark evaluation BENCHOP by running the co
 
 ### Running the frontend GUI
 
-1. `npm install -g @angular/cli`
+1. `npm install -g @angular/cli`(If you don't have Node Package Manager installed, download here: https://nodejs.org/en/)
 
 2. Open terminal/command line in the BENCHOP-front directory
 
