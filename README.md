@@ -14,7 +14,7 @@ This project aims to speed up the benchmark evaluation BENCHOP by running the co
 
 1. The celery workers are all set up, but run `flower --broker='amqp://acc5:0000@192.168.2.249:5672/acc5host` if you want to see the workload of each worker.
 
-2. run `python3 BENCHOP/flaskFrontend.py` from the main node if the you can not curl it.
+2. run `python3 BENCHOP/flaskFrontend.py` from the main node if the you get the Connection Refused error when you run the below commands.
 
 3. run `curl -i http://130.238.29.12:5000/flaskFrontend?no=1,2,3,5` if you want to evaluate all problems with default parameters. (4th and 6th ones can not be evaluated, will be handled in the future release.)
 
