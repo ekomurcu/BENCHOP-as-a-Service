@@ -10,7 +10,9 @@ This project aims to speed up the benchmark evaluation BENCHOP by running the co
 
 2. Open terminal/command line in the BENCHOP-front directory
 
-3. `ng serve`
+3. `npm install`
 
-4. Go to `https://localhost:4200/`
+4. `ng serve`
+
+5. Go to `https://localhost:4200/`
 
