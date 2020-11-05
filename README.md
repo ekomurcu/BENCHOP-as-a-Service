@@ -1,4 +1,4 @@
-# ACC5_project
+# BENCHOP-as-a-Service
 
 This project aims to speed up the benchmark evaluation BENCHOP by running the computations in parallell in the SNIC cloud.
 
